@@ -10,10 +10,12 @@
     Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/45/5/common.js"></script>
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 </head>
@@ -76,6 +78,41 @@
     vertical-align: middle;
     border-style: none;
   }
+  .jvectormap-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+}
+  .jvectormap-tip {
+    position: absolute;
+    display: none;
+    color: #555;
+    line-height: 1.5em;
+    background: #fff;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
+    padding: 5px 10px;
+    z-index: 1040;
+}
+.jvectormap-goback, .jvectormap-zoomin, .jvectormap-zoomout {
+    position: absolute;
+    left: 10px;
+    border-radius: 3px;
+    background: #292929;
+    padding: 3px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 10px;
+    text-align: center;
+    box-sizing: content-box;
+}
+.jvectormap-zoomin, .jvectormap-zoomout {
+    width: 10px;
+    height: 10px;
+}
 </style>
 
 <body class="">
@@ -298,6 +335,111 @@
               </div>
             </div>
           </div>
+		  <div class="col-md-12">
+                <div class="card ">
+                  <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons"></i>
+                    </div>
+                    <h4 class="card-title">Global Blood Requests by Top Locations</h4>
+                  </div>
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="table-responsive table-sales">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/US.png" <="" div="">
+                                </div></td>
+                                <td>USA</td>
+                                <td class="text-right">
+                                  2920
+                                </td>
+                                <td class="text-right">
+                                  53.23%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/DE.png" <="" div="">
+                                </div></td>
+                                <td>Germany</td>
+                                <td class="text-right">
+                                  1300
+                                </td>
+                                <td class="text-right">
+                                  20.43%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/AU.png" <="" div="">
+                                </div></td>
+                                <td>Australia</td>
+                                <td class="text-right">
+                                  760
+                                </td>
+                                <td class="text-right">
+                                  10.35%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/GB.png" <="" div="">
+                                </div></td>
+                                <td>United Kingdom</td>
+                                <td class="text-right">
+                                  690
+                                </td>
+                                <td class="text-right">
+                                  7.87%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/RO.png" <="" div="">
+                                </div></td>
+                                <td>Romania</td>
+                                <td class="text-right">
+                                  600
+                                </td>
+                                <td class="text-right">
+                                  5.94%
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="flag">
+                                    <img src="../assets/img/flags/BR.png" <="" div="">
+                                </div></td>
+                                <td>Brasil</td>
+                                <td class="text-right">
+                                  550
+                                </td>
+                                <td class="text-right">
+                                  4.34%
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-6 ml-auto mr-auto">
+                        <div id="worldMap" style="height: 300px;">
+
+					</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
 
       </div>
@@ -368,7 +510,7 @@
   <!-- Library for adding dinamically elements -->
   <script src="../assets/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
   <!-- Chartist JS -->
   <script src="../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -382,9 +524,11 @@
     $(document).ready(function () {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
-
+       md.initVectorMap();
     });
+	
   </script>
+  <div class="jvectormap-tip" style="display: none; left: 1131.97px; top: 276px;"></div>
 </body>
 
 </html>
